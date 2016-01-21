@@ -14,37 +14,64 @@
  * limitations under the License.
  */
 
-package sample.data.elasticsearch;
+package elasticsearch;
 
+import com.dellnaresh.biz.LocalFileListener;
+import com.dellnaresh.db.House;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.core.NestedCheckedException;
 
-import java.net.ConnectException;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.text.ParseException;
+import java.util.List;
 
 @SpringBootApplication
-public class SampleElasticsearchApplication implements CommandLineRunner {
+	public class SampleElasticsearchApplication implements CommandLineRunner {
 
 	@Autowired
 	private CustomerRepository repository;
+
+	@Autowired
+	private HouseRepository houseRepository;
+
+
+		private LocalFileListener fileListener=new LocalFileListener();
 
 	@Override
 	public void run(String... args) throws Exception {
 		this.repository.deleteAll();
 		saveCustomers();
-//		fetchAllCustomers();
-//		fetchIndividualCustomers();
+		fetchAllCustomers();
+		fetchIndividualCustomers();
+		saveHouses();
+		fetchByAgency("Barry Plant");
 	}
 
-	private void saveCustomers() {
+	private void fetchByAgency(String s) {
+		List<House> byAgency = houseRepository.findByAgency(s);
+		for(House house:byAgency){
+			System.out.println(house);
+		}
+	}
+
+	private void saveHouses() {
+			try {
+				List<House> houses = fileListener.getHouses(Paths.get("Melbourne_Auctions_01_12_2015.pdf"));
+				for(House house:houses){
+					houseRepository.save(house);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+
+		private void saveCustomers() {
 		this.repository.save(new Customer("Alice", "Smith"));
-		this.repository.save(new Customer("Alice Test", "Smith"));
-		this.repository.save(new Customer("Alice ds", "Smith"));
-		this.repository.save(new Customer("Alice ds", "Smith"));
-		this.repository.save(new Customer("Alice sds", "Smith"));
 		this.repository.save(new Customer("Bob", "Smith"));
 	}
 
@@ -70,7 +97,6 @@ public class SampleElasticsearchApplication implements CommandLineRunner {
 	}
 
 	public static void main(String[] args) throws Exception {
-        SpringApplication.run(SampleElasticsearchApplication.class,args);
-    }
-
+		SpringApplication.run(SampleElasticsearchApplication.class, "--debug").close();
+	}
 }

@@ -31,7 +31,7 @@
 		<module>spring-boot-sample-atmosphere</module>
 		<module>spring-boot-sample-batch</module>
 		<module>spring-boot-sample-data-elasticsearch</module>
-		<module>spring-boot-sample-data-gemfire</module>
+		<!--<module>spring-boot-sample-data-gemfire</module>-->
 		<module>spring-boot-sample-data-jpa</module>
 		<module>spring-boot-sample-data-mongodb</module>
 		<module>spring-boot-sample-data-redis</module>

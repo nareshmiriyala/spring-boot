@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<body>
+
+##<span>Message: $message.content</span>
+<table border="1"  style="width:30%">
+
+    #foreach ($content in $message)
+    <tr>
+    <td>
+        $content.firstName
+        </td>
+    </tr>
+
+    #end
+</table>
+</body>
+
+</html>
