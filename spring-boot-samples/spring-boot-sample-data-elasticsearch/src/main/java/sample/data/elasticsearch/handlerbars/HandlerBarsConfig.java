@@ -19,17 +19,17 @@ public class HandlerBarsConfig {
     public HandlebarsViewResolver viewResolver() {
         HandlebarsViewResolver viewResolver = new HandlebarsViewResolver();
 
-//        Helper<Object> helper = new Helper<Object>() {
-//            @Override
-//            public CharSequence apply(final Object context, final Options options) throws IOException {
-//                return "Spring Helper";
-//            }
-//        };
-//        viewResolver.registerHelper("spring", helper);
-//        viewResolver.registerHelpers(HandlerBarsConfig.class);
-//        Map<String, Helper<?>> helpers = new HashMap<String, Helper<?>>();
-//        helpers.put("setHelper", helper);
-//        viewResolver.setHelpers(helpers);
+        Helper<Object> helper = new Helper<Object>() {
+            @Override
+            public CharSequence apply(final Object context, final Options options) throws IOException {
+                return "Spring Helper";
+            }
+        };
+        viewResolver.registerHelper("spring", helper);
+        viewResolver.registerHelpers(HandlerBarsConfig.class);
+        Map<String, Helper<?>> helpers = new HashMap<String, Helper<?>>();
+        helpers.put("setHelper", helper);
+        viewResolver.setHelpers(helpers);
         // no cache for testing
         viewResolver.setCache(false);
 

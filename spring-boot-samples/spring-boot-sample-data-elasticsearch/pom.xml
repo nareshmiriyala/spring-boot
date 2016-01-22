@@ -36,11 +36,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-        <dependency>
-            <groupId>com.github.jknack</groupId>
-            <artifactId>handlebars-springmvc</artifactId>
-            <version>${handlebars.version}</version>
-		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
