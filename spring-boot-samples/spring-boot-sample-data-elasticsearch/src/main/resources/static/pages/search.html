@@ -1,26 +1,21 @@
-<html xmlns:form="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Customer Search</title>
-</head>
-<body>
-
-<h2>Customer Search</h2>
-<form method="post" action="{{rc.contextPath}}/getCustomer">
-    <table>
-        <tr>
-            <td><label name="firstName">First Name</label></td>
-            <td><input type="text" name="firstName" /></td>
-        </tr>
-        <tr>
-            <td><label name="lastName">Last Name</label></td>
-            <td><input type="text" name="lastName" /></td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" value="Search"/>
-            </td>
-        </tr>
-    </table>
-</form>
-</body>
-</html>
+<h2>Customer Information</h2>
+<div ng-controller="searchCntrl as searchctrl">
+    <form method="post" ng-submit="searchctrl.getCustomer()">
+        <table>
+            <tr>
+                <td><label class="control-label " name="firstName">First Name</label></td>
+                <td><input type="text" name="firstName" ng-model="searchctrl.customer.firstName"/></td>
+            </tr>
+            <tr>
+                <td><label class="control-label "  name="lastName">Last Name</label></td>
+                <td><input type="text" name="lastName" ng-model="searchctrl.customer.lastName"/></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input class="btn btn-primary " type="submit" value="Search Customer">
+                </td>
+            </tr>
+        </table>
+        <div ng-model="homectrl.resp"></div>
+    </form>
+</div>

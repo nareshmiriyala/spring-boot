@@ -16,7 +16,10 @@ var app = angular.module('customerSearchApp', [
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         // Home
-        .when("/home", {templateUrl: "/pages/home.html", controller: "PageCtrl"})
+        .when("/home", {templateUrl: "/pages/home.html", controller: "homeCntrl"})
+        .when("/welcome", {templateUrl: "/pages/welcome.html", controller: "welcomeCntrl"})
+        .when("/result", {templateUrl: "/pages/result.html", controller: "resultCntrl"})
+        .when("/search", {templateUrl: "/pages/search.html", controller: "searchCntrl"})
         // else 404
         .otherwise("/404", {templateUrl: "/pages/404.html", controller: "PageCtrl"});
 }]);
@@ -26,3 +29,7 @@ app.config(['$routeProvider', function ($routeProvider) {
  * Controls all other Pages
  */
 app.controller('PageCtrl', pageController);
+app.controller('homeCntrl', homeController);
+app.controller('welcomeCntrl', welcomeController);
+app.controller('resultCntrl', resultController);
+app.controller('searchCntrl', searchController);

@@ -15,3 +15,40 @@ var pageController = function (/* $scope, $location, $http */) {
         selector: "a[data-toggle=tooltip]"
     })
 };
+
+var homeController = function ($http) {
+    var self = this;
+    self.items = [];
+    self.resp = {};
+
+    self.addCustomer = function () {
+        console.log("Add customer details:" + self.customer)
+        $http.post('/addCustomer', self.customer)
+            .then(function (response) {
+                self.resp = response.data;
+                console.log(self.resp);
+                self.message = "Success";
+            }, function (response) {
+                self.message = "Failure to add";
+            });
+    };
+
+};
+var searchController = function ($http) {
+    var self = this;
+    self.items = [];
+    self.resp = {};
+
+    self.getCustomer = function () {
+        console.log("Get customer details:" + self.customer)
+        $http.post('/getCustomer', self.customer)
+            .then(function (response) {
+                self.resp = response.data;
+                console.log(self.resp);
+                self.message = "Success";
+            }, function (response) {
+                self.message = "Failure to add";
+            });
+    };
+
+};
