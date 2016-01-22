@@ -24,10 +24,11 @@ public class SearchController {
     private ElasticsearchTemplate elasticsearchTemplate;
     @Autowired
     private CustomerRepository customerRepository;
-    @RequestMapping("/getCustomer")
-     public String helloWorld(@RequestParam("input")String input,Map<String, Object> model) {
+    @RequestMapping(value = "/getCustomer",method = RequestMethod.POST)
+     public String helloWorld(@RequestParam("firstName")String firstName,@RequestParam("lastName")String lastName,Map<String, Object> model) {
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
-                .withQuery(queryStringQuery(input).field("firstName"))
+                .withQuery(queryStringQuery(firstName).field("firstName"))
+                .withQuery(queryStringQuery(lastName).field("lastName"))
                 .build();
         Page<Customer> sampleEntities = elasticsearchTemplate.queryForPage(searchQuery,Customer.class);
         model.put("message",sampleEntities);
@@ -36,6 +37,10 @@ public class SearchController {
     @RequestMapping("/")
     public String index(){
         return "index";
+    }
+    @RequestMapping(value = "/search",method = RequestMethod.GET)
+    public String search(){
+        return "search";
     }
     @RequestMapping(value = "/addCustomer", method = RequestMethod.POST)
     public String addCustomer(@ModelAttribute("customer")Customer customer,
@@ -46,4 +51,5 @@ public class SearchController {
 
         return "result";
     }
+
 }
