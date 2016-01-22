@@ -22,11 +22,11 @@ var homeController = function ($http) {
     self.resp = {};
 
     self.addCustomer = function () {
-        console.log("Add customer details:" + self.customer)
+        console.log("Add customer details:" + self.customer.firstName)
         $http.post('/addCustomer', self.customer)
             .then(function (response) {
                 self.resp = response.data;
-                console.log(self.resp);
+                console.log("Response"+self.resp);
                 self.message = "Success";
             }, function (response) {
                 self.message = "Failure to add";
@@ -40,11 +40,11 @@ var searchController = function ($http) {
     self.resp = {};
 
     self.getCustomer = function () {
-        console.log("Get customer details:" + self.customer)
+        console.log("Get customer details:" + self.customer.firstName)
         $http.post('/getCustomer', self.customer)
             .then(function (response) {
                 self.resp = response.data;
-                console.log(self.resp);
+                console.log("Response"+self.resp);
                 self.message = "Success";
             }, function (response) {
                 self.message = "Failure to add";

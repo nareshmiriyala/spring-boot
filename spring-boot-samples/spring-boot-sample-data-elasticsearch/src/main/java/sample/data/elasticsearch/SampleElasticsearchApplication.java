@@ -26,17 +26,17 @@ import org.springframework.core.NestedCheckedException;
 import java.net.ConnectException;
 
 @SpringBootApplication
-public class SampleElasticsearchApplication implements CommandLineRunner {
+public class SampleElasticsearchApplication  {
 
 	@Autowired
 	private CustomerRepository repository;
 
-	@Override
-	public void run(String... args) throws Exception {
-		saveCustomers();
-//		fetchAllCustomers();
-//		fetchIndividualCustomers();
-	}
+//	@Override
+//	public void run(String... args) throws Exception {
+//		saveCustomers();
+////		fetchAllCustomers();
+////		fetchIndividualCustomers();
+//	}
 
 	private void saveCustomers() {
 		this.repository.save(new Customer("Alice", "Smith"));
