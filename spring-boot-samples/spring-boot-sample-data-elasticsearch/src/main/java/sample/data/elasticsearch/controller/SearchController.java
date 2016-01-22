@@ -6,9 +6,10 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 import sample.data.elasticsearch.Customer;
+import sample.data.elasticsearch.CustomerRepository;
 
 import java.util.Map;
 
@@ -21,13 +22,28 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 public class SearchController {
     @Autowired
     private ElasticsearchTemplate elasticsearchTemplate;
-    @RequestMapping("/")
-     public String helloWorld(Map<String, Object> model) {
+    @Autowired
+    private CustomerRepository customerRepository;
+    @RequestMapping("/getCustomer")
+     public String helloWorld(@RequestParam("input")String input,Map<String, Object> model) {
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
-                .withQuery(queryStringQuery("Alice").field("firstName"))
+                .withQuery(queryStringQuery(input).field("firstName"))
                 .build();
         Page<Customer> sampleEntities = elasticsearchTemplate.queryForPage(searchQuery,Customer.class);
         model.put("message",sampleEntities);
        return "welcome";
+    }
+    @RequestMapping("/")
+    public String index(){
+        return "index";
+    }
+    @RequestMapping(value = "/addCustomer", method = RequestMethod.POST)
+    public String addCustomer(@ModelAttribute("customer")Customer customer,
+                             ModelMap model) {
+        customerRepository.save(customer);
+        model.addAttribute("firstName", customer.getFirstName());
+        model.addAttribute("lastName", customer.getLastName());
+
+        return "result";
     }
 }

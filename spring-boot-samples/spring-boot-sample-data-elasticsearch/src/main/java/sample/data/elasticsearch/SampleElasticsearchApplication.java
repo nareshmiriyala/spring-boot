@@ -33,7 +33,6 @@ public class SampleElasticsearchApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		this.repository.deleteAll();
 		saveCustomers();
 //		fetchAllCustomers();
 //		fetchIndividualCustomers();
