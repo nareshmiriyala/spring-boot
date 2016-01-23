@@ -17,7 +17,7 @@ app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         // Home
         .when("/home", {templateUrl: "/pages/home.html", controller: "homeCntrl"})
-        .when("/welcome", {templateUrl: "/pages/welcome.html", controller: "welcomeCntrl"})
+        //.when("/welcome", {templateUrl: "/pages/welcome.html", controller: "welcomeCntrl"})
         .when("/result", {templateUrl: "/pages/result.html", controller: "resultCntrl"})
         .when("/search", {templateUrl: "/pages/search.html", controller: "searchCntrl"})
         // else 404
@@ -30,6 +30,6 @@ app.config(['$routeProvider', function ($routeProvider) {
  */
 app.controller('PageCtrl', pageController);
 app.controller('homeCntrl', homeController);
-app.controller('welcomeCntrl', welcomeController);
+//app.controller('welcomeCntrl', welcomeController);
 app.controller('resultCntrl', resultController);
 app.controller('searchCntrl', searchController);

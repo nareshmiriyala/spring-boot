@@ -18,15 +18,14 @@ var pageController = function (/* $scope, $location, $http */) {
 
 var homeController = function ($http) {
     var self = this;
-    self.items = [];
-    self.resp = {};
+
 
     self.addCustomer = function () {
         console.log("Add customer details:" + self.customer.firstName)
         $http.post('/addCustomer', self.customer)
             .then(function (response) {
-                self.resp = response.data;
-                console.log("Response"+self.resp);
+                self.mess = response.data;
+                console.log("Response:"+self.resp);
                 self.message = "Success";
             }, function (response) {
                 self.message = "Failure to add";
